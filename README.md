@@ -27,7 +27,7 @@ edit configuration (e.g. identity param or authentication settings):
 ```bash
 docker stop camlistored && docker rm -v camlistored
 docker run --name camlistore_import --volumes-from=camlidata -i -t ubuntu:14.04 /bin/bash
-apt-get install vim && vim /srv/camlistore/.config/camlistore/server-config.json
+apt-get install -y vim && vim /srv/camlistore/.config/camlistore/server-config.json
 ```
 
 copy identity secret:
@@ -36,7 +36,7 @@ copy identity secret:
 docker stop camlistored && docker rm -v camlistored
 docker run --name camlistore_import --volumes-from=camlidata -i -t ubuntu:14.04 /bin/bash
 #open second terminal and run
-cat ~/.config/camlistore/identity-secring.gpg | docker exec -i camlistored sh -c 'cat > /srv/camlistore/.config/camlistore/identity-secring.gpg'
+cat ~/.config/camlistore/identity-secring.gpg | docker exec -i camlistore_import sh -c 'cat > /srv/camlistore/.config/camlistore/identity-secring.gpg'
 ```
 
 and run camlistore again:
