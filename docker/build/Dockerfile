@@ -1,6 +1,10 @@
 FROM mkorenkov/go:latest
 
-RUN git clone https://camlistore.googlesource.com/camlistore /opt/camlistore && cd /opt/camlistore && git checkout tags/0.9 && cd -
+RUN export CAMLISTORE_VERSION="0.9" && \
+    git clone https://camlistore.googlesource.com/camlistore /opt/camlistore && \
+    cd /opt/camlistore && \
+    git checkout "tags/$CAMLISTORE_VERSION" && \ 
+    cd -
 WORKDIR /opt/camlistore
-ENV PATH=/usr/local/go/bin/:$PATH
+
 VOLUME ["/opt/camlistore/bin"]
