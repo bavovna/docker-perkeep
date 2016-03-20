@@ -28,7 +28,11 @@ if [ ! -f "$CONFDIR/server-config.json" ]; then
   #todo: modify config accordingly
   camlistore_auth_escape=$(echo $CAMLISTORE_AUTH | sed 's/\//\\\//g' | sed 's/"/\"/g')
   sed -i "s/\"auth\": \"localhost\",/\"auth\": \"${camlistore_auth_escape}\",/g" "$CONFDIR/server-config.json"
+  sed -i "s/levelDB/kvIndexFile/g" "$CONFDIR/server-config.json"
+  sed -i "s/leveldb/kvIndexFile/g" "$CONFDIR/server-config.json"
   cat "$CONFDIR/server-config.json"
+  echo
+  rm -rf $DATADIR 
 fi
 
 cd /srv/camlistore/
