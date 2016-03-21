@@ -30,6 +30,7 @@ if [ ! -f "$CONFDIR/server-config.json" ]; then
   sed -i "s/\"auth\": \"localhost\",/\"auth\": \"${camlistore_auth_escape}\",/g" "$CONFDIR/server-config.json"
   sed -i "s/levelDB/kvIndexFile/g" "$CONFDIR/server-config.json"
   sed -i "s/leveldb/kvIndexFile/g" "$CONFDIR/server-config.json"
+  sed -i "s/packRelated/packBlobs/g" "$CONFDIR/server-config.json"
   cat "$CONFDIR/server-config.json"
   echo
   rm -rf $DATADIR 
