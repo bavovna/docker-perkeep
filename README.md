@@ -44,3 +44,11 @@ and run camlistore again:
 ```bash
 docker run -d --restart=always --name=camlistored --volumes-from=camlidata -p 3179:3179 mkorenkov/camlistored:latest
 ```
+
+## camtool
+
+run camtool container command (e.g. `dumpconfig`) with:
+
+```bash
+docker run --rm --name camtool --volumes-from=camlidata -i -t mkorenkov/camtool dumpconfig
+```

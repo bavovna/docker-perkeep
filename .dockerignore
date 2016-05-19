@@ -1,8 +1,0 @@
-docker/build/bin/camdeploy
-docker/build/bin/camget
-docker/build/bin/cammount
-docker/build/bin/camput
-docker/build/bin/camtool
-docker/build/bin/devcam
-docker/build/bin/hello
-docker/build/bin/publisher
