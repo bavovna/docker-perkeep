@@ -17,7 +17,7 @@ docker run -d --name=camlistored --volumes-from=camlidata -p 3179:3179 -e CAMLIS
 all the subsequent runs do not require authentication settings:
 ```bash
 docker stop camlistored && docker rm -v camlistored
-docker run -d --restart=always --name=camlistored --volumes-from=camlidata -p 3179:3179 mkorenkov/camlistored:latest
+docker run -d --restart=always --memory="4G" --name=camlistored --volumes-from=camlidata -p 3179:3179 mkorenkov/camlistored:latest
 ```
 
 ## advanced instructions:
@@ -42,7 +42,7 @@ cat ~/.config/camlistore/identity-secring.gpg | docker exec -i camlistore_import
 and run camlistore again:
 
 ```bash
-docker run -d --restart=always --name=camlistored --volumes-from=camlidata -p 3179:3179 mkorenkov/camlistored:latest
+docker run -d --restart=always --memory="4G" --name=camlistored --volumes-from=camlidata -p 3179:3179 mkorenkov/camlistored:latest
 ```
 
 ## camtool
