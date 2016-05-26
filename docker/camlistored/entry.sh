@@ -33,8 +33,9 @@ if [ ! -f "$CONFDIR/server-config.json" ]; then
   sed -i "s/packRelated/packBlobs/g" "$CONFDIR/server-config.json"
   cat "$CONFDIR/server-config.json"
   echo
-  rm -rf $DATADIR 
+  rm -rf $DATADIR
 fi
 
 cd /srv/camlistore/
 gosu camlistore /usr/local/bin/camlistored "$@"
+sync

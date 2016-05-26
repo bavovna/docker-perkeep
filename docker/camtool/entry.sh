@@ -11,3 +11,4 @@ chown -R camlistore /srv/camlistore
 
 cd /srv/camlistore/
 gosu camlistore /usr/local/bin/camtool "$@"
+sync
