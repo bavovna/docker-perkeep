@@ -17,7 +17,7 @@ docker run -d --name=camlistored --volumes-from=camlidata -p 3179:3179 -e CAMLIS
 all the subsequent runs do not require authentication settings:
 ```bash
 docker stop camlistored && docker rm -v camlistored
-docker run -d --restart=always --memory="4G" --name=camlistored --volumes-from=camlidata -p 3179:3179 mkorenkov/camlistored:latest
+docker run -d --restart=always --memory="1G" --name=camlistored --volumes-from=camlidata -p 3179:3179 mkorenkov/camlistored:latest
 ```
 
 ## advanced instructions:
@@ -26,15 +26,15 @@ edit configuration (e.g. identity param or authentication settings):
 
 ```bash
 docker stop camlistored && docker rm -v camlistored
-docker run --name camlistore_import --volumes-from=camlidata -i -t ubuntu:14.04 /bin/bash
-apt-get install -y vim && vim /srv/camlistore/.config/camlistore/server-config.json
+docker run --rm --name camlistore_import --volumes-from=camlidata -i -t ubuntu:14.04 /bin/bash
+apt-get update && apt-get install -y vim && vim /srv/camlistore/.config/camlistore/server-config.json
 ```
 
 copy identity secret:
 
 ```bash
 docker stop camlistored && docker rm -v camlistored
-docker run --name camlistore_import --volumes-from=camlidata -i -t ubuntu:14.04 /bin/bash
+docker run --rm --name camlistore_import --volumes-from=camlidata -i -t ubuntu:14.04 /bin/bash
 #open second terminal and run
 cat ~/.config/camlistore/identity-secring.gpg | docker exec -i camlistore_import sh -c 'cat > /srv/camlistore/.config/camlistore/identity-secring.gpg'
 ```
@@ -42,7 +42,7 @@ cat ~/.config/camlistore/identity-secring.gpg | docker exec -i camlistore_import
 and run camlistore again:
 
 ```bash
-docker run -d --restart=always --memory="4G" --name=camlistored --volumes-from=camlidata -p 3179:3179 mkorenkov/camlistored:latest
+docker run -d --restart=always --memory="1G" --name=camlistored --volumes-from=camlidata -p 3179:3179 mkorenkov/camlistored:latest
 ```
 
 ## camtool
