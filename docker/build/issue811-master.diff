@@ -1,0 +1,13 @@
+diff --git a/pkg/blobserver/google/cloudstorage/storage.go b/pkg/blobserver/google/cloudstorage/storage.go
+index dd5188d..22eb64a 100644
+--- a/pkg/blobserver/google/cloudstorage/storage.go
++++ b/pkg/blobserver/google/cloudstorage/storage.go
+@@ -157,7 +157,7 @@ func newFromConfig(_ blobserver.Loader, config jsonconfig.Obj) (blobserver.Stora
+ 	gs.client = cl
+ 
+ 	if cacheSize != 0 {
+-		gs.cache = memory.NewCache(cacheSize)
++		gs.cache = memory.NewCache(5<<20)
+ 	}
+ 
+ 	ba, err := gs.client.Bucket(gs.bucket).Attrs(ctx)
