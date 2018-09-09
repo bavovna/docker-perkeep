@@ -18,7 +18,7 @@ if [ ! -f "$CONFDIR/server-config.json" ]; then
   fi
   # generate configs in hacky way
   {
-  	gosu camlistore /usr/local/bin/camlistored & PID=$!
+  	gosu camlistore /usr/local/bin/perkeepd & PID=$!
   	# wait until started
   	sleep 5
   	kill -15 $PID
@@ -37,5 +37,5 @@ if [ ! -f "$CONFDIR/server-config.json" ]; then
 fi
 
 cd /srv/camlistore/
-gosu camlistore /usr/local/bin/camlistored "$@"
+gosu camlistore /usr/local/bin/perkeepd "$@"
 sync

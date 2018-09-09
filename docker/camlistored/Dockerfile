@@ -2,7 +2,7 @@ FROM mkorenkov/alpine
 
 VOLUME ["/srv/camlistore"]
 
-COPY ./bin/camlistored /usr/local/bin/camlistored
+COPY ./bin/perkeepd /usr/local/bin/perkeepd
 COPY ./entry.sh /usr/local/bin/docker-entry.sh
 # explicitly set user/group IDs
 RUN addgroup -S -g 999 camlistore && \

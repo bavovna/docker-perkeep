@@ -1,14 +1,13 @@
 FROM mkorenkov/go:latest
 
-COPY ./issue811-master.diff /opt/issue811.diff
-#RUN export CAMLISTORE_VERSION="tags/0.9" && \
-RUN export CAMLISTORE_VERSION="ce8b329d1d62a4ff6ab87812f657914ae7625f6d" && \
-    git clone https://camlistore.googlesource.com/camlistore /opt/camlistore && \
-    cd /opt/camlistore && \
+ENV GOPATH="/srv/go"
+RUN export CAMLISTORE_VERSION="ad6dae391e62c3689d68e27e91c11b9b7e3ef9b3" && \
+    mkdir -p /srv/go/src && \
+    git clone https://github.com/perkeep/perkeep.git /srv/go/src/perkeep.org && \
+    cd /srv/go/src/perkeep.org && \
     git checkout $CAMLISTORE_VERSION && \
-    git apply /opt/issue811.diff && \
-    rm /opt/issue811.diff && \
-    cd -
-WORKDIR /opt/camlistore
+    cd - && \
+    ls -l /srv/go/src/perkeep.org
+WORKDIR /srv/go/src/perkeep.org
 
-VOLUME ["/opt/camlistore/bin"]
+VOLUME ["/srv/go/src/perkeep.org/bin"]

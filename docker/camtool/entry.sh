@@ -10,5 +10,5 @@ mkdir -p "$CONFDIR" && chmod 700 "$CONFDIR"
 chown -R camlistore /srv/camlistore
 
 cd /srv/camlistore/
-gosu camlistore /usr/local/bin/camtool "$@"
+gosu camlistore /usr/local/bin/pk "$@"
 sync
