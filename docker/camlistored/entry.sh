@@ -2,8 +2,8 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-CONFDIR="/srv/camlistore/.config/camlistore/"
-DATADIR="/srv/camlistore/var/camlistore"
+CONFDIR="/srv/camlistore/.config/perkeep/"
+DATADIR="/srv/camlistore/var/perkeep"
 
 mkdir -p "$DATADIR" && chmod 700 "$DATADIR"
 mkdir -p "$CONFDIR" && chmod 700 "$CONFDIR"
