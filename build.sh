@@ -5,7 +5,7 @@ IFS=$'\n\t'
 
 cd docker/build
 docker build -t mkorenkov/camlistore-build:latest .
-docker run --rm -v `pwd`/bin:/srv/go/bin mkorenkov/camlistore-build:latest go run make.go --sqlite=false -v
+docker run --rm -v `pwd`/bin:/srv/go/bin mkorenkov/camlistore-build:latest go run make.go --sqlite=false -static=true -v
 cp bin/perkeepd ../camlistored/bin/
 cp bin/pk ../camtool/bin/
 
