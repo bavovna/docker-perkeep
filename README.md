@@ -1,5 +1,5 @@
 # docker-perkeep
-docker images for perkeep (aka camlistore)
+prebuilt docker image of perkeep (aka camlistore)
 
 ## instructions
 
