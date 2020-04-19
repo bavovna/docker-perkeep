@@ -13,10 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: install go
-      uses: actions/setup-go@v1
-      with:
-        go-version: 1.14
 
     - name: login to registry
       uses: actions-hub/docker/login@master
