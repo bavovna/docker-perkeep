@@ -1,0 +1,36 @@
+name: docker
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    # monthly, 3rd day, 3:15am in America/Los_Angeles
+    - cron: '15 11 * 3 *'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: install go
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.14
+
+    - name: login to registry
+      uses: actions-hub/docker/login@master
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_REGISTRY_URL: docker.pkg.github.com
+
+    - name: build :latest
+      if: success()
+      run: cd $GITHUB_WORKSPACE && docker build -t docker.pkg.github.com/mkorenkov/perkeep/perkeep:latest .
+        
+    - name: push :latest
+      if: success()
+      uses: actions-hub/docker@master
+      with:
+        args: push docker.pkg.github.com/mkorenkov/perkeep/perkeep:latest
