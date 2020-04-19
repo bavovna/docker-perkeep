@@ -10,6 +10,7 @@ docker run -d --restart=always --memory="1G" --name=perkeepd --volume=/srv/perke
 
 1. modify `/srv/perkeep/.config/perkeep/server-config.json` according to [perkeep docs](https://perkeep.org/doc/server-config).
 2. get [Google maps key](https://developers.google.com/maps/documentation/geocoding/get-api-key) and save it to `/srv/perkeep/.config/perkeep/google-geocode.key`
+3. add `alias pk="docker run --rm -it --volume=/srv/perkeep:/srv/perkeep docker.pkg.github.com/mkorenkov/docker-perkeep/perkeep:latest /bin/pk"` to your env
 
 ## (optional) obtaining Google Cloud Compute key
 
