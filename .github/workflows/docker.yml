@@ -27,10 +27,10 @@ jobs:
 
     - name: build :latest
       if: success()
-      run: cd $GITHUB_WORKSPACE && docker build -t docker.pkg.github.com/mkorenkov/perkeep/perkeep:latest .
+      run: cd $GITHUB_WORKSPACE && docker build -t docker.pkg.github.com/mkorenkov/docker-perkeep/perkeep:latest .
         
     - name: push :latest
       if: success()
       uses: actions-hub/docker@master
       with:
-        args: push docker.pkg.github.com/mkorenkov/perkeep/perkeep:latest
+        args: push docker.pkg.github.com/mkorenkov/docker-perkeep/perkeep:latest
