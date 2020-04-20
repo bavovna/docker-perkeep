@@ -21,6 +21,7 @@ RUN addgroup -S -g 993 perkeep && \
     apk add --update \
         bash \
         bind-tools \
+        ffmpeg \
         imagemagick \
         libjpeg-turbo-utils \
         su-exec \
