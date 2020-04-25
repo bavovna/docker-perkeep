@@ -21,3 +21,59 @@ docker run -d --restart=always --memory="1G" --name=perkeepd --volume=/srv/perke
 docker run -it --volume=/srv/perkeep:/srv/perkeep docker.pkg.github.com/mkorenkov/docker-perkeep/perkeep:latest /bin/pk googinit -type cloud
 ```
 4. paste results into your config (consult perkeep docs)
+
+## (optional) low level configuration
+
+Low level config can be printed using `pk dumpconfig`
+
+### Google Cloud Storage
+
+```json
+    "/sto-googlecloudstorage/": {
+      "handler": "storage-googlecloudstorage",
+      "handlerArgs": {
+        "auth": {
+          "client_id": "something.apps.googleusercontent.com",
+          "client_secret": "client-secret",
+          "refresh_token": "refresh-token"
+        },
+        "bucket": "bucket-name"
+      }
+    },
+    "/sync-to-googlecloudstorage/": {
+      "handler": "sync",
+      "handlerArgs": {
+        "from": "/bs/",
+        "queue": {
+          "file": "/srv/perkeep/var/perkeep/blobs/sync-to-googlecloud-queue.leveldb",
+          "type": "leveldb"
+        },
+        "to": "/sto-googlecloudstorage/"
+      }
+    },
+```
+
+## S3 compatible storage
+
+```json
+    "/sto-wasabi/": {
+      "handler": "storage-s3",
+      "handlerArgs": {
+        "aws_access_key": "very-secret",
+        "aws_secret_access_key": "such-secret-vow",
+        "bucket": "bucket-name",
+        "hostname": "s3.us-west-1.wasabisys.com"
+      }
+    },
+    "/sync-to-wasabi/": {
+      "handler": "sync",
+      "handlerArgs": {
+        "from": "/bs/",
+        "queue": {
+          "file": "/srv/perkeep/var/perkeep/blobs/sync-to-wasabi-queue.leveldb",
+          "type": "leveldb"
+        },
+        "to": "/sto-wasabi/"
+      }
+    },
+```
