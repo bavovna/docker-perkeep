@@ -29,110 +29,110 @@ Low level config can be printed using `pk dumpconfig`
 ### Google Cloud Storage
 
 ```json
-    "/sto-googlecloudstorage/": {
-      "handler": "storage-googlecloudstorage",
-      "handlerArgs": {
-        "auth": {
-          "client_id": "something.apps.googleusercontent.com",
-          "client_secret": "client-secret",
-          "refresh_token": "refresh-token"
-        },
-        "bucket": "bucket-name"
-      }
+"/sto-googlecloudstorage/": {
+  "handler": "storage-googlecloudstorage",
+  "handlerArgs": {
+    "auth": {
+      "client_id": "something.apps.googleusercontent.com",
+      "client_secret": "client-secret",
+      "refresh_token": "refresh-token"
     },
-    "/sync-to-googlecloudstorage/": {
-      "handler": "sync",
-      "handlerArgs": {
-        "from": "/bs/",
-        "queue": {
-          "file": "/srv/perkeep/var/perkeep/blobs/sync-to-googlecloud-queue.leveldb",
-          "type": "leveldb"
-        },
-        "to": "/sto-googlecloudstorage/"
-      }
+    "bucket": "bucket-name"
+  }
+},
+"/sync-to-googlecloudstorage/": {
+  "handler": "sync",
+  "handlerArgs": {
+    "from": "/bs/",
+    "queue": {
+      "file": "/srv/perkeep/var/perkeep/blobs/sync-to-googlecloud-queue.leveldb",
+      "type": "leveldb"
     },
+    "to": "/sto-googlecloudstorage/"
+  }
+},
 ```
 
 ## S3 compatible storage
 
 ```json
-    "/sto-wasabi/": {
-      "handler": "storage-s3",
-      "handlerArgs": {
-        "aws_access_key": "very-secret",
-        "aws_secret_access_key": "such-secret-vow",
-        "bucket": "bucket-name",
-        "hostname": "s3.us-west-1.wasabisys.com"
-      }
+"/sto-wasabi/": {
+  "handler": "storage-s3",
+  "handlerArgs": {
+    "aws_access_key": "very-secret",
+    "aws_secret_access_key": "such-secret-vow",
+    "bucket": "bucket-name",
+    "hostname": "s3.us-west-1.wasabisys.com"
+  }
+},
+"/sync-to-wasabi/": {
+  "handler": "sync",
+  "handlerArgs": {
+    "from": "/bs/",
+    "queue": {
+      "file": "/srv/perkeep/var/perkeep/blobs/sync-to-wasabi-queue.leveldb",
+      "type": "leveldb"
     },
-    "/sync-to-wasabi/": {
-      "handler": "sync",
-      "handlerArgs": {
-        "from": "/bs/",
-        "queue": {
-          "file": "/srv/perkeep/var/perkeep/blobs/sync-to-wasabi-queue.leveldb",
-          "type": "leveldb"
-        },
-        "to": "/sto-wasabi/"
-      }
-    },
+    "to": "/sto-wasabi/"
+  }
+},
 ```
 
 ## Replication
 
 ```json
-    "/repl/": {
-			"handler": "storage-replica",
-			"handlerArgs": {
-				"backends": ["/sto-wasabi-east/", "/sto-wasabi-west/"],
-				"minWritesForSuccess": 2
-			}
+"/repl/": {
+  "handler": "storage-replica",
+  "handlerArgs": {
+    "backends": ["/sto-wasabi-east/", "/sto-wasabi-west/"],
+    "minWritesForSuccess": 2
+  }
+},
+"/sync-to-replicas/": {
+  "handler": "sync",
+  "handlerArgs": {
+    "from": "/bs/",
+    "queue": {
+      "file": "/srv/perkeep/var/perkeep/blobs/sync-to-replicas-queue.leveldb",
+      "type": "leveldb"
     },
-    "/sync-to-replicas/": {
-      "handler": "sync",
-      "handlerArgs": {
-        "from": "/bs/",
-        "queue": {
-          "file": "/srv/perkeep/var/perkeep/blobs/sync-to-replicas-queue.leveldb",
-          "type": "leveldb"
-        },
-        "to": "/repl/"
-      }
-    },
+    "to": "/repl/"
+  }
+},
 ```
 
 ## Encryption
 
 ```json
-    "/enc-wasabi-east/": {
-      "handler": "storage-encrypt",
-      "handlerArgs": {
-        "I_AGREE": "that encryption support hasn't been peer-reviewed, isn't finished, and its format might change.",
-        "meta": "/enc-wasabi-east-meta/",
-        "blobs": "/enc-wasabi-east-blob/",
-        "metaIndex": {
-          "file": "/srv/perkeep/var/perkeep/blobs/enc-wasabi-east-queue.leveldb",
-          "type": "leveldb"
-        },
-        "passphrase": "secret"
-      }
+"/enc-wasabi-east/": {
+  "handler": "storage-encrypt",
+  "handlerArgs": {
+    "I_AGREE": "that encryption support hasn't been peer-reviewed, isn't finished, and its format might change.",
+    "meta": "/enc-wasabi-east-meta/",
+    "blobs": "/enc-wasabi-east-blob/",
+    "metaIndex": {
+      "file": "/srv/perkeep/var/perkeep/blobs/enc-wasabi-east-queue.leveldb",
+      "type": "leveldb"
     },
-    "/enc-wasabi-east-meta/": {
-      "handler": "storage-s3",
-      "handlerArgs": {
-        "aws_access_key": "very-secret",
-        "aws_secret_access_key": "such-secret-vow",
-        "bucket": "bucket-name/meta",
-        "hostname": "s3.us-east-2.wasabisys.com"
-      }
-    },
-    "/enc-wasabi-east-blob/": {
-      "handler": "storage-s3",
-      "handlerArgs": {
-        "aws_access_key": "very-secret",
-        "aws_secret_access_key": "such-secret-vow",
-        "bucket": "bucket-name/blob",
-        "hostname": "s3.us-east-2.wasabisys.com"
-      }
-    },
+    "passphrase": "secret"
+  }
+},
+"/enc-wasabi-east-meta/": {
+  "handler": "storage-s3",
+  "handlerArgs": {
+    "aws_access_key": "very-secret",
+    "aws_secret_access_key": "such-secret-vow",
+    "bucket": "bucket-name/meta",
+    "hostname": "s3.us-east-2.wasabisys.com"
+  }
+},
+"/enc-wasabi-east-blob/": {
+  "handler": "storage-s3",
+  "handlerArgs": {
+    "aws_access_key": "very-secret",
+    "aws_secret_access_key": "such-secret-vow",
+    "bucket": "bucket-name/blob",
+    "hostname": "s3.us-east-2.wasabisys.com"
+  }
+},
 ```
