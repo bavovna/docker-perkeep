@@ -136,3 +136,16 @@ Low level config can be printed using `pk dumpconfig`
   }
 },
 ```
+
+# Recovery
+
+[Perkeep recovery instructions](https://github.com/perkeep/perkeep/issues/1180)
+
+```
+docker stop perkeepd && docker rm -v perkeepd
+docker run -d --restart=always --memory="1G" --name=perkeepd --volume=/srv/perkeep:/srv/perkeep -p 3179:3179 docker.pkg.github.com/mkorenkov/docker-perkeep/perkeep:latest /bin/perkeepd -listen 0.0.0.0:3179 -reindex -recovery=2
+docker stop perkeepd && docker rm -v perkeepd
+
+# and start it back normally, e.g.
+docker run -d --restart=always --memory="1G" --name=perkeepd --volume=/srv/perkeep:/srv/perkeep -p 3179:3179 docker.pkg.github.com/mkorenkov/docker-perkeep/perkeep:latest /bin/perkeepd
+```
