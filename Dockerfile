@@ -1,4 +1,4 @@
-FROM golang:1.14 AS build
+FROM golang:1.17 AS build
 RUN export PERKEEP_DIR="/go/src/github.com/perkeep/perkeep" && \
     export PERKEEP_VERSION="c2e31370ddefd86b6112a5d891100ea3382a4254" && \
     mkdir -p "/go/src/github.com/perkeep" && \
