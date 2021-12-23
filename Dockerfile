@@ -16,8 +16,8 @@ COPY --from=build /go/bin/pk* /bin/
 COPY --from=build /go/bin/perkeepd /bin/
 
 # explicitly set user/group IDs
-RUN addgroup -S -g 993 perkeep && \
-    adduser -S -h /srv/perkeep -u 993 -G perkeep perkeep && \
+RUN addgroup -S -g 1000 perkeep && \
+    adduser -S -h /srv/perkeep -u 1000 -G perkeep perkeep && \
     apk add --update \
         bash \
         bind-tools \
